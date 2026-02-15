@@ -6,9 +6,15 @@
 </picture>
 </p>
 
+Material for the short course "Physics-Informed Statistical Learning for Spatial and Functional Data" held during the lecture series in "Advanced Topics in Statistical Machine Learning", Rome (IT), 18 February 2026. 
+
+__Lectures: Laura Maria Sangalli <sup>1</sup>, Ilenia Di Battista <sup>1</sup>__.
+
+&nbsp;&nbsp;&nbsp;&nbsp;_<sup>1</sup> MOX, Dep. of Mathematics, Politecnico di Milano_
+
 # Getting started
 
-`fdaPDE` is a C++ library with a Python interface, one of the most widely used languages for data analysis. The version of `fdaPDE` used in this course is not yet stable and is not available as an official Python package for all platforms. A testing version can be found on [TestPyPI](https://test.pypi.org/project/fdaPDE/2.0.0/). 
+`fdaPDE` is a C++ library interfacing with Python, one of the most widely used languages for data analysis. The version of `fdaPDE` used in this course is not yet stable and is not available as an official Python package for all platforms. A testing version can be found on [TestPyPI](https://test.pypi.org/project/fdaPDE/2.0.0/). 
 
 All notebooks can be executed on [Google Colab](https://colab.google/). If you prefer to run the code locally, follow the instructions below to set up your system.
 
@@ -141,7 +147,7 @@ All notebooks can be executed on [Google Colab](https://colab.google/). If you p
 
 * **Windows**
 
-  Due to current incompatibilities between fdaPDE and MSVC, Windows users must rely on Windows Subsystem for Linux (WSL) to run the notebooks. We strongly recommend running the course material on [Google Colab](https://colab.google/) if the procedure below fails or if you prefer not to set up WSL on your machine.
+  Due to current incompatibilities between `fdaPDE` and MSVC, Windows users must rely on Windows Subsystem for Linux (WSL) to run the notebooks. We strongly recommend running the course material on [Google Colab](https://colab.google/) if the procedure below fails or if you prefer not to set up WSL on your machine.
   
   If you have never configured WSL before, open Command Prompt or PowerShell as Administrator and execute:
   
