@@ -868,7 +868,7 @@ def display_satellite_data(
     vmax = np.nanmax(data)
 
     if palette is not None:
-        colormap = bc.LinearColormap(
+        colormap = bcm.LinearColormap(
             colors=palette, vmin=vmin, vmax=vmax, caption=layer_name
         )
         norm = mcolors.Normalize(vmin=vmin, vmax=vmax)
@@ -892,7 +892,7 @@ def display_satellite_data(
         rgba_img = cmap(norm(data))
         rgba_img = (rgba_img * 255).astype(np.uint8)
 
-        colormap = bc.LinearColormap(
+        colormap = bcm.LinearColormap(
             colors=[cmap(i) for i in np.linspace(0, 1, 256)],
             vmin=vmin,
             vmax=vmax,
