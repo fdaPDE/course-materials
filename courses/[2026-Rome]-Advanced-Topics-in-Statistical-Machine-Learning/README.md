@@ -10,13 +10,25 @@ Material for the short course "Physics-Informed Statistical Learning for Spatial
 
 __Lectures: Laura Maria Sangalli <sup>1</sup>, Ilenia Di Battista <sup>1</sup>__.
 
-&nbsp;&nbsp;&nbsp;&nbsp;_<sup>1</sup> MOX, Dep. of Mathematics, Politecnico di Milano_
+&nbsp;&nbsp;&nbsp;&nbsp;_<sup>1</sup> MOX, Department of Mathematics, Politecnico di Milano_
 
 # Getting started
 
-`fdaPDE` is a C++ library interfacing with Python, one of the most widely used languages for data analysis. The version of `fdaPDE` used in this course is not yet stable and is not available as an official Python package for all platforms. A testing version can be found on [TestPyPI](https://test.pypi.org/project/fdaPDE/2.0.0/). 
+`fdaPDE` is a C++ library interfacing with Python, one of the most widely used languages for data analysis. The version of `fdaPDE` used in this course is not yet available as an official Python package for all platforms. A testing version can be found on [TestPyPI](https://test.pypi.org/project/fdaPDE/2.0.0/). 
 
-All notebooks can be executed on [Google Colab](https://colab.google/). If you prefer to run the code locally, follow the instructions below to set up your system.
+All notebooks can be executed on [Google Colab](https://colab.google/). More informations on the "Colab instructions" section. If you instead prefer to run the code locally, follow the "Installation instructions" section to set up your system.
+
+## Colab instructions
+
+To run the notebooks on [Google Colab](https://colab.google/), just open one of the link below. If necessary, grant permissions to Google to trust the notebook.
+
+**Be sure to run the setup cell at the beginning of each notebook to download the data and install all the required dependencies**.
+
+* [Spatial regression](https://colab.research.google.com/github/fdaPDE/course-materials/blob/main/courses/[2026-Rome]-Advanced-Topics-in-Statistical-Machine-Learning/notebook/SRPDE_2D.ipynb)
+* [Generalized regression](https://colab.research.google.com/github/fdaPDE/course-materials/blob/main/courses/[2026-Rome]-Advanced-Topics-in-Statistical-Machine-Learning/notebook/GSRPDE_2D.ipynb)
+* [Quantile regression](https://colab.research.google.com/github/fdaPDE/course-materials/blob/main/courses/[2026-Rome]-Advanced-Topics-in-Statistical-Machine-Learning/notebook/QSRPDE_2D.ipynb)
+* [Density estimation](https://colab.research.google.com/github/fdaPDE/course-materials/blob/main/courses/[2026-Rome]-Advanced-Topics-in-Statistical-Machine-Learning/notebook/DEPDE_2D.ipynb)
+* [functional Principal Component Analysis](https://colab.research.google.com/github/fdaPDE/course-materials/blob/main/courses/[2026-Rome]-Advanced-Topics-in-Statistical-Machine-Learning/notebook/fPCA_2D.ipynb)
 
 ## Installation instructions
 
@@ -24,7 +36,7 @@ All notebooks can be executed on [Google Colab](https://colab.google/). If you p
 
 * **Linux**
   
-  The commands reported here assume an Ubuntu (or Debian-based) distribution with the apt package manager. If you use a different distribution, install all system-level dependencies according to your distribution.
+  The commands reported here assume an Ubuntu (or Debian-based) distribution with the `apt` package manager. If you use a different distribution, install all system-level dependencies according to your distribution.
   
   First, check your Python version:
   
@@ -32,7 +44,7 @@ All notebooks can be executed on [Google Colab](https://colab.google/). If you p
   python --version
   ```
   
-  If needed, install or upgrade Python. In addition, make sure that venv is available on your system. You can install it with:
+  If needed, install or upgrade Python. In addition, make sure that `venv` is available on your system. You can install it with:
   
   ```
   sudo apt install -y python3-venv python3-dev
@@ -46,7 +58,8 @@ All notebooks can be executed on [Google Colab](https://colab.google/). If you p
   cd rome26_fdapde_course
   
   # clone the course material
-  git clone https://github.com/fdaPDE/course-materials .
+  git clone https://github.com/fdaPDE/course-materials
+  cd course-materials/courses/\[2026-Rome\]-Advanced-Topics-in-Statistical-Machine-Learning/
   
   # create the Python virtual environment for this course
   python -m venv .venv
@@ -62,7 +75,7 @@ All notebooks can be executed on [Google Colab](https://colab.google/). If you p
   pip install notebook jupyterlab ipykernel
   
   # register the virtual environment 
-  python -m ipykernel install --user --name=fdapde_env --display-name "fdaPDE-py, Rome26"
+  python -m ipykernel install --user --name=.venv --display-name "fdaPDE-py, Rome26"
   
   # install the fdaPDE package from TestPyPI
   pip install -i https://test.pypi.org/simple/ fdaPDE
@@ -76,7 +89,7 @@ All notebooks can be executed on [Google Colab](https://colab.google/). If you p
   pip install GDAL==x.y.z
   ```
   
-  Finally, launch jupyter by executing
+  Finally, from the folder `courses/\[2026-Rome\]-Advanced-Topics-in-Statistical-Machine-Learning/`, launch jupyter by executing
   
   ```
   jupyter notebook
@@ -85,7 +98,7 @@ All notebooks can be executed on [Google Colab](https://colab.google/). If you p
   If your browser does not open Jupyter automatically, inspect the output produced by the command above and copy-paste the link
 `http://localhost:8888/tree?token=...` into your browser.
   
-  For each notebook, select the "fdaPDE-py, Rome26" kernel by clicking on "Kernel" → "Change kernel..." and then selecting "fdaPDE-py, Rome26".
+  Select a notebook from the `notebook/` folder, then select the "fdaPDE-py, Rome26" kernel by clicking on "Kernel" → "Change kernel..." and then selecting "fdaPDE-py, Rome26".
 
 
   You are now up and running. Enjoy the course!
@@ -107,10 +120,11 @@ All notebooks can be executed on [Google Colab](https://colab.google/). If you p
   cd rome26_fdapde_course
   
   # clone the course material
-  git clone https://github.com/fdaPDE/course-materials .
+  git clone https://github.com/fdaPDE/course-materials
+  cd course-materials/courses/\[2026-Rome\]-Advanced-Topics-in-Statistical-Machine-Learning/
   
   # create the Python virtual environment for this course
-  python -m venv .venv
+  python3 -m venv .venv
   source .venv/bin/activate
      
   # install the required python dependencies
@@ -119,7 +133,7 @@ All notebooks can be executed on [Google Colab](https://colab.google/). If you p
   pip install notebook jupyterlab ipykernel
   
   # register the virtual environment 
-  python -m ipykernel install --user --name=fdapde_env --display-name "fdaPDE-py, Rome26"
+  python3 -m ipykernel install --user --name=.venv --display-name "fdaPDE-py, Rome26"
   
   # install the fdaPDE package from TestPyPI
   pip install -i https://test.pypi.org/simple/ fdaPDE
@@ -131,7 +145,7 @@ All notebooks can be executed on [Google Colab](https://colab.google/). If you p
   brew install gdal
   ```
 
-  Finally, launch jupyter by executing
+  Finally, from the folder `courses/\[2026-Rome\]-Advanced-Topics-in-Statistical-Machine-Learning/`, launch jupyter by executing
   
   ```
   jupyter notebook
@@ -140,7 +154,7 @@ All notebooks can be executed on [Google Colab](https://colab.google/). If you p
   If your browser does not open Jupyter automatically, inspect the output produced by the command above and copy-paste the link
 `http://localhost:8888/tree?token=...` into your browser.
   
-  For each notebook, select the "fdaPDE-py, Rome26" kernel by clicking on "Kernel" → "Change kernel..." and then selecting "fdaPDE-py, Rome26".
+  Select a notebook from the `notebook/` folder, then select the "fdaPDE-py, Rome26" kernel by clicking on "Kernel" → "Change kernel..." and then selecting "fdaPDE-py, Rome26".
 
 
   You are now up and running. Enjoy the course!
@@ -190,7 +204,8 @@ All notebooks can be executed on [Google Colab](https://colab.google/). If you p
   cd rome26_fdapde
   
   # clone the course material
-  git clone https://github.com/fdaPDE/course-materials .
+  git clone https://github.com/fdaPDE/course-materials
+  cd course-materials/courses/\[2026-Rome\]-Advanced-Topics-in-Statistical-Machine-Learning/
   
   # create the Python virtual environment for this course
   python3.12 -m venv .venv
@@ -202,7 +217,7 @@ All notebooks can be executed on [Google Colab](https://colab.google/). If you p
   pip install notebook jupyterlab ipykernel
   
   # register the virtual environment 
-  python3.12 -m ipykernel install --user --name=fdapde_env --display-name "fdaPDE-py, Rome26"
+  python3.12 -m ipykernel install --user --name=.venv --display-name "fdaPDE-py, Rome26"
   
   # install the fdaPDE package from TestPyPI
   pip install -i https://test.pypi.org/simple/ fdaPDE
@@ -216,7 +231,7 @@ All notebooks can be executed on [Google Colab](https://colab.google/). If you p
   pip install GDAL==x.y.z
   ```
   
-  Finally, launch jupyter by executing:
+  Finally, from the folder `courses/\[2026-Rome\]-Advanced-Topics-in-Statistical-Machine-Learning/`, launch jupyter by executing
   
   ```
   jupyter notebook
@@ -224,7 +239,7 @@ All notebooks can be executed on [Google Colab](https://colab.google/). If you p
   
   Inspect the output produced by the command above and copy-paste the link `http://localhost:8888/tree?token=...` into your browser.
 
-  For each notebook, select the "fdaPDE-py, Rome26" kernel by clicking on "Kernel" → "Change kernel..." and then selecting "fdaPDE-py, Rome26".
+   Select a notebook from the `notebook/` folder, then select the "fdaPDE-py, Rome26" kernel by clicking on "Kernel" → "Change kernel..." and then selecting "fdaPDE-py, Rome26".
 
 
   You are now up and running. Enjoy the course!
