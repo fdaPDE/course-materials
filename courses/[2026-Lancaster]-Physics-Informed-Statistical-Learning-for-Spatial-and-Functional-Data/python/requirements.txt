@@ -1,0 +1,9 @@
+numpy
+matplotlib
+pandas
+geopandas
+folium
+branca
+rasterio
+rioxarray
+seaborn
