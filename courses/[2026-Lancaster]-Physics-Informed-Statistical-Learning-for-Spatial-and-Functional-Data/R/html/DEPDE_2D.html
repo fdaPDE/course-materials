@@ -7825,7 +7825,7 @@ The first term represents the <em>model fit</em> criterion. The second term ensu
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=119e11aa">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=119e11aa">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7834,190 +7834,12 @@ The first term represents the <em>model fit</em> criterion. The second term ensu
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-r"><pre><span></span><span class="c1"># Import the fdaPDE library</span>
-<span class="nf">library</span><span class="p">(</span><span class="n">fdaPDE2</span><span class="p">)</span><span class="w">           </span><span class="c1"># v. 2.0 (2025)</span>
+<span class="nf">suppressPackageStartupMessages</span><span class="p">(</span><span class="nf">library</span><span class="p">(</span><span class="n">fdaPDE2</span><span class="p">))</span><span class="w">  </span><span class="c1"># v. 2.0 (2025)</span>
 <span class="nf">rm</span><span class="p">(</span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">ls</span><span class="p">())</span>
 
 <span class="c1"># Load additional libraries and helper functions for plotting</span>
 <span class="nf">source</span><span class="p">(</span><span class="s">"../utils/graphics.R"</span><span class="p">)</span>
-
-<span class="c1"># Keep spatial objects readable without the optional GeoJSON renderer.</span>
-<span class="nf">options</span><span class="p">(</span><span class="n">jupyter.display_mimetypes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">setdiff</span><span class="p">(</span><span class="nf">getOption</span><span class="p">(</span><span class="s">"jupyter.display_mimetypes"</span><span class="p">),</span><span class="w"> </span><span class="s">"application/geo+json"</span><span class="p">))</span>
 </pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>
-Attaching package: ‘dplyr’
-
-
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>The following objects are masked from ‘package:stats’:
-
-    filter, lag
-
-
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>The following objects are masked from ‘package:base’:
-
-    intersect, setdiff, setequal, union
-
-
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>Loading required package: ggplot2
-
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre><span class="ansi-green-fg">ℹ</span> Google's Terms of Service: <span class="ansi-blue-fg">&lt;https://mapsplatform.google.com&gt;</span>
-  Stadia Maps' Terms of Service: <span class="ansi-blue-fg">&lt;https://stadiamaps.com/terms-of-service&gt;</span>
-  OpenStreetMap's Tile Usage Policy: <span class="ansi-blue-fg">&lt;https://operations.osmfoundation.org/policies/tiles&gt;</span>
-<span class="ansi-green-fg">ℹ</span> Please cite <span class="ansi-blue-fg">ggmap</span> if you use it! Use `citation("ggmap")` for details.
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>Loading required package: sp
-
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>
-Attaching package: ‘raster’
-
-
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>The following object is masked from ‘package:dplyr’:
-
-    select
-
-
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>Linking to GEOS 3.15.0, GDAL 3.13.3, PROJ 9.8.1; sf_use_s2() is TRUE
-
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>WARNING: different compile-time and runtime versions for GEOS found:
-
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>Linked against: 3.15.0-CAPI-1.21.0 compiled against: 3.14.1-CAPI-1.20.5
-
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>It is probably a good idea to reinstall sf (and maybe lwgeom too)
-
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>Loading required package: viridisLite
-
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>Loading required package: spam
-
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>Spam version 2.9-1 (2022-08-07) is loaded.
-Type 'help( Spam)' or 'demo( spam)' for a short introduction 
-and overview of this package.
-Help for individual functions is also obtained by adding the
-suffix '.spam' to the function name, e.g. 'help( chol.spam)'.
-
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>
-Attaching package: ‘spam’
-
-
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>The following objects are masked from ‘package:base’:
-
-    backsolve, forwardsolve
-
-
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>
-Try help(fields) to get started.
-
-</pre>
 </div>
 </div>
 </div>
@@ -8070,10 +7892,8 @@ Try help(fields) to get started.
 <span class="nf">head</span><span class="p">(</span><span class="n">boundary_nodes</span><span class="p">)</span>
 
 <span class="c1"># Load the boundary segments</span>
-<span class="n">boundary_segments</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">cbind</span><span class="p">(</span><span class="nf">seq_len</span><span class="p">(</span><span class="nf">nrow</span><span class="p">(</span><span class="n">boundary_nodes</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">1</span><span class="p">),</span>
-<span class="w">                           </span><span class="m">2</span><span class="o">:</span><span class="nf">nrow</span><span class="p">(</span><span class="n">boundary_nodes</span><span class="p">))</span>
+<span class="n">boundary_segments</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">cbind</span><span class="p">(</span><span class="nf">seq_len</span><span class="p">(</span><span class="nf">nrow</span><span class="p">(</span><span class="n">boundary_nodes</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="m">2</span><span class="o">:</span><span class="nf">nrow</span><span class="p">(</span><span class="n">boundary_nodes</span><span class="p">))</span>
 <span class="n">boundary_segments</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rbind</span><span class="p">(</span><span class="n">boundary_segments</span><span class="p">,</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="nf">nrow</span><span class="p">(</span><span class="n">boundary_nodes</span><span class="p">),</span><span class="w"> </span><span class="m">1</span><span class="p">))</span>
-<span class="nf">head</span><span class="p">(</span><span class="n">boundary_segments</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -8103,22 +7923,6 @@ Try help(fields) to get started.
 </table>
 </div>
 </div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
-<table class="dataframe">
-<caption>A matrix: 6 × 2 of type dbl</caption>
-<tbody>
-<tr><td>1</td><td>2</td></tr>
-<tr><td>2</td><td>3</td></tr>
-<tr><td>3</td><td>4</td></tr>
-<tr><td>4</td><td>5</td></tr>
-<tr><td>5</td><td>6</td></tr>
-<tr><td>6</td><td>7</td></tr>
-</tbody>
-</table>
-</div>
-</div>
 </div>
 </div>
 </div>
@@ -8141,16 +7945,17 @@ Try help(fields) to get started.
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-r"><pre><span></span><span class="c1"># Convert boundary into a sf object</span>
-<span class="n">boundary_nodes_sf</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">st_as_sf</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">rbind</span><span class="p">(</span><span class="n">boundary_nodes</span><span class="p">,</span><span class="w"> </span><span class="n">boundary_nodes</span><span class="p">[</span><span class="m">1</span><span class="p">,]),</span>
-<span class="w">                              </span><span class="n">coords</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">"lon"</span><span class="p">,</span><span class="w"> </span><span class="s">"lat"</span><span class="p">),</span><span class="w"> </span><span class="n">crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4326</span><span class="p">)</span>
-<span class="n">boundary_polygon</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">st_polygon</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="nf">st_coordinates</span><span class="p">(</span><span class="n">boundary_nodes_sf</span><span class="p">)))</span>
-<span class="n">boundary_sfc</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">st_sfc</span><span class="p">(</span><span class="n">geometry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">boundary_polygon</span><span class="p">,</span><span class="w"> </span><span class="n">crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4326</span><span class="p">)</span>
-<span class="n">boundary_sf</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">st_sf</span><span class="p">(</span><span class="n">geometry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">boundary_sfc</span><span class="p">)</span>
+<span class="n">boundary_nodes_sf</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">st_as_sf</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">rbind</span><span class="p">(</span><span class="n">boundary_nodes</span><span class="p">,</span><span class="w"> </span><span class="n">boundary_nodes</span><span class="p">[</span><span class="m">1</span><span class="p">,]),</span><span class="w"> </span><span class="n">coords</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">"lon"</span><span class="p">,</span><span class="w"> </span><span class="s">"lat"</span><span class="p">),</span><span class="w"> </span><span class="n">crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4326</span><span class="p">)</span>
+<span class="n">boundary_polygon</span><span class="w">  </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">st_polygon</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="nf">st_coordinates</span><span class="p">(</span><span class="n">boundary_nodes_sf</span><span class="p">)))</span>
+<span class="n">boundary_sfc</span><span class="w">      </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">st_sfc</span><span class="p">(</span><span class="n">geometry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">boundary_polygon</span><span class="p">,</span><span class="w"> </span><span class="n">crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4326</span><span class="p">)</span>
+<span class="n">boundary_sf</span><span class="w">       </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">st_sf</span><span class="p">(</span><span class="n">geometry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">boundary_sfc</span><span class="p">)</span>
 
 <span class="c1"># Interactive plot</span>
-<span class="nf">display_map</span><span class="p">(</span><span class="nf">mapview</span><span class="p">(</span><span class="n">boundary_sf</span><span class="p">,</span>
+<span class="nf">display_map</span><span class="p">(</span>
+<span class="w">    </span><span class="nf">mapview</span><span class="p">(</span><span class="n">boundary_sf</span><span class="p">,</span>
 <span class="w">        </span><span class="n">col.regions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"gray25"</span><span class="p">,</span><span class="w"> </span><span class="n">alpha.regions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.25</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"black"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.5</span><span class="p">,</span>
-<span class="w">        </span><span class="n">legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">layer.name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"domain"</span><span class="p">))</span>
+<span class="w">        </span><span class="n">legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">layer.name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"domain"</span><span class="p">)</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -8231,7 +8036,6 @@ Figure 1: Spatial domain of interest -- Southampton, Hampshire County, UK.
 
 <span class="c1"># Number of nodes</span>
 <span class="nf">nrow</span><span class="p">(</span><span class="n">mesh</span><span class="o">$</span><span class="n">P</span><span class="p">)</span>
-
 <span class="c1"># Number of triangles</span>
 <span class="nf">nrow</span><span class="p">(</span><span class="n">mesh</span><span class="o">$</span><span class="bp">T</span><span class="p">)</span>
 </pre></div>
@@ -8268,7 +8072,7 @@ Figure 1: Spatial domain of interest -- Southampton, Hampshire County, UK.
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=6075080a">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=6075080a">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8277,29 +8081,25 @@ Figure 1: Spatial domain of interest -- Southampton, Hampshire County, UK.
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-r"><pre><span></span><span class="c1"># Set up the triangulation for fdaPDE</span>
-<span class="n">mesh</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">triangulation</span><span class="p">(</span><span class="n">nodes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mesh</span><span class="o">$</span><span class="n">P</span><span class="p">,</span><span class="w"> </span><span class="n">cells</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mesh</span><span class="o">$</span><span class="bp">T</span><span class="p">,</span>
-<span class="w">                      </span><span class="n">boundary</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mesh</span><span class="o">$</span><span class="n">PB</span><span class="p">)</span>
-
-<span class="c1"># Nodes coordinates</span>
+<span class="n">mesh</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">triangulation</span><span class="p">(</span><span class="n">nodes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mesh</span><span class="o">$</span><span class="n">P</span><span class="p">,</span><span class="w"> </span><span class="n">cells</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mesh</span><span class="o">$</span><span class="bp">T</span><span class="p">,</span><span class="w"> </span><span class="n">boundary</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mesh</span><span class="o">$</span><span class="n">PB</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=51749f8c-4998-4ab6-8f4a-57c241b3ba87">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [7]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-r"><pre><span></span><span class="c1"># Nodes</span>
 <span class="nf">head</span><span class="p">(</span><span class="n">mesh</span><span class="o">$</span><span class="n">nodes</span><span class="p">)</span>
 
 <span class="c1"># Number of nodes</span>
-<span class="n">mesh</span><span class="o">$</span><span class="n">n_nodes</span>
-
-<span class="c1"># Edges</span>
-<span class="nf">head</span><span class="p">(</span><span class="n">mesh</span><span class="o">$</span><span class="n">edges</span><span class="p">)</span>
-
-<span class="c1"># Number of edges</span>
-<span class="n">mesh</span><span class="o">$</span><span class="n">n_edges</span>
-
-<span class="c1"># Triangles</span>
-<span class="nf">head</span><span class="p">(</span><span class="n">mesh</span><span class="o">$</span><span class="n">cells</span><span class="p">)</span>
-
-<span class="c1"># Number of triangles</span>
-<span class="n">mesh</span><span class="o">$</span><span class="n">n_cells</span>
-
-<span class="c1"># Bounding box</span>
-<span class="n">mesh</span><span class="o">$</span><span class="n">bbox</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">"Number of mesh nodes:"</span><span class="p">,</span><span class="w"> </span><span class="n">mesh</span><span class="o">$</span><span class="n">n_nodes</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -8327,10 +8127,34 @@ Figure 1: Spatial domain of interest -- Southampton, Hampshire County, UK.
 </div>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
-4149
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Number of mesh nodes: 4149</pre>
 </div>
 </div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=e74efbf8-b183-4ce0-ac60-6572c52a0af7">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [8]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-r"><pre><span></span><span class="c1"># Edges</span>
+<span class="nf">head</span><span class="p">(</span><span class="n">mesh</span><span class="o">$</span><span class="n">edges</span><span class="p">)</span>
+
+<span class="c1"># Number of edges</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">"Number of mesh edges:"</span><span class="p">,</span><span class="w"> </span><span class="n">mesh</span><span class="o">$</span><span class="n">n_edges</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
@@ -8349,10 +8173,34 @@ Figure 1: Spatial domain of interest -- Southampton, Hampshire County, UK.
 </div>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
-11840
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Number of mesh edges: 11840</pre>
 </div>
 </div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=2be58d85-f22e-4771-94d6-fd28cfd7f6fb">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [9]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-r"><pre><span></span><span class="c1"># Triangles</span>
+<span class="nf">head</span><span class="p">(</span><span class="n">mesh</span><span class="o">$</span><span class="n">cells</span><span class="p">)</span>
+
+<span class="c1"># Number of triangles</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">"Number of mesh triangles:"</span><span class="p">,</span><span class="w"> </span><span class="n">mesh</span><span class="o">$</span><span class="n">n_cells</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
@@ -8371,20 +8219,8 @@ Figure 1: Spatial domain of interest -- Southampton, Hampshire County, UK.
 </div>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
-7692
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
-<table class="dataframe">
-<caption>A matrix: 2 × 2 of type dbl</caption>
-<tbody>
-<tr><td>-1.9572</td><td>50.7057</td></tr>
-<tr><td>-0.7293</td><td>51.3839</td></tr>
-</tbody>
-</table>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Number of mesh triangles: 7692</pre>
 </div>
 </div>
 </div>
@@ -8405,15 +8241,17 @@ Figure 1: Spatial domain of interest -- Southampton, Hampshire County, UK.
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [7]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-r"><pre><span></span><span class="c1"># Interactive plot</span>
-<span class="nf">display_map</span><span class="p">(</span><span class="nf">mapview</span><span class="p">(</span><span class="n">boundary_sf</span><span class="p">,</span>
+<span class="nf">display_map</span><span class="p">(</span>
+<span class="w">    </span><span class="nf">mapview</span><span class="p">(</span><span class="n">boundary_sf</span><span class="p">,</span>
 <span class="w">        </span><span class="n">col.regions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"gray25"</span><span class="p">,</span><span class="w"> </span><span class="n">alpha.regions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.25</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"black"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.5</span><span class="p">,</span>
 <span class="w">        </span><span class="n">legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">layer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"domain"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">mapview</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span><span class="w"> </span><span class="n">crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4326</span><span class="p">,</span>
-<span class="w">          </span><span class="n">col.regions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"transparent"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.25</span><span class="p">,</span><span class="w"> </span><span class="n">legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">layer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"mesh"</span><span class="p">))</span>
+<span class="w">    </span><span class="nf">mapview</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span><span class="w"> </span><span class="n">crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4326</span><span class="p">,</span>
+<span class="w">          </span><span class="n">col.regions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"transparent"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.25</span><span class="p">,</span><span class="w"> </span><span class="n">legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">layer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"mesh"</span><span class="p">)</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -8478,7 +8316,7 @@ Figure 2: Regular mesh of Southampton, Hampshire County, UK, with $4\,149$ nodes
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [8]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [11]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-r"><pre><span></span><span class="c1"># Create the geoframe</span>
@@ -8521,7 +8359,7 @@ Number of cells: 7692
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [9]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [12]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-r"><pre><span></span><span class="c1">## [DATA]</span>
@@ -8595,15 +8433,17 @@ Dims: 2500, 2</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [10]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [13]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-r"><pre><span></span><span class="c1"># Interactive plot</span>
-<span class="nf">display_map</span><span class="p">(</span><span class="nf">mapview</span><span class="p">(</span><span class="n">hampshire</span><span class="p">[[</span><span class="s">"diseases"</span><span class="p">]],</span><span class="w"> </span><span class="n">varnames</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">""</span><span class="p">,</span><span class="w"> </span><span class="n">crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4326</span><span class="p">,</span><span class="w"> </span><span class="n">col.regions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"red3"</span><span class="p">,</span>
+<span class="nf">display_map</span><span class="p">(</span>
+<span class="w">    </span><span class="nf">mapview</span><span class="p">(</span><span class="n">hampshire</span><span class="p">[[</span><span class="s">"diseases"</span><span class="p">]],</span><span class="w"> </span><span class="n">varnames</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">""</span><span class="p">,</span><span class="w"> </span><span class="n">crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4326</span><span class="p">,</span><span class="w"> </span><span class="n">col.regions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"red3"</span><span class="p">,</span>
 <span class="w">        </span><span class="n">cex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2.5</span><span class="p">,</span><span class="w"> </span><span class="n">layer.name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"locations"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w"> </span><span class="nf">mapview</span><span class="p">(</span><span class="n">boundary_sf</span><span class="p">,</span>
+<span class="w">    </span><span class="nf">mapview</span><span class="p">(</span><span class="n">boundary_sf</span><span class="p">,</span>
 <span class="w">         </span><span class="n">col.regions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"gray25"</span><span class="p">,</span><span class="w"> </span><span class="n">alpha.regions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.25</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"black"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.5</span><span class="p">,</span>
-<span class="w">         </span><span class="n">legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">layer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"domain"</span><span class="p">))</span>
+<span class="w">         </span><span class="n">legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">layer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"domain"</span><span class="p">)</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -8668,7 +8508,7 @@ Figure 3: Locations of non-specific gastrointestinal symptoms reported to Nation
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [11]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [14]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-r"><pre><span></span><span class="c1">## [DENSITY ESTIMATION]</span>
@@ -8705,17 +8545,14 @@ Figure 3: Locations of non-specific gastrointestinal symptoms reported to Nation
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [12]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [15]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-r"><pre><span></span><span class="c1"># Density estimates at mesh nodes</span>
-<span class="nf">head</span><span class="p">(</span><span class="n">model</span><span class="o">$</span><span class="n">density</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">"Density estimate at mesh nodes:"</span><span class="p">,</span><span class="w"> </span><span class="nf">head</span><span class="p">(</span><span class="n">model</span><span class="o">$</span><span class="n">density</span><span class="p">))</span>
 
 <span class="c1"># Log-density estimates at mesh nodes</span>
-<span class="nf">head</span><span class="p">(</span><span class="n">model</span><span class="o">$</span><span class="n">log_density</span><span class="p">)</span>
-
-<span class="c1"># Finite element function</span>
-<span class="n">f</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">fe_function</span><span class="p">(</span><span class="n">domain</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="n">mesh</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"P1"</span><span class="p">,</span><span class="w"> </span><span class="n">coeff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">model</span><span class="o">$</span><span class="n">log_density</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">"Log-density estimate at mesh nodes:"</span><span class="p">,</span><span class="w"> </span><span class="nf">head</span><span class="p">(</span><span class="n">model</span><span class="o">$</span><span class="n">log_density</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -8727,24 +8564,29 @@ Figure 3: Locations of non-specific gastrointestinal symptoms reported to Nation
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
-<style>
-.list-inline {list-style: none; margin:0; padding: 0}
-.list-inline>li {display: inline-block}
-.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
-</style>
-<ol class="list-inline"><li>5.70325306945415e+81</li><li>2.96473380903796e+73</li><li>0.38056626711558</li><li>7.8548104333789e+145</li><li>5.93778087314685e+164</li><li>9.17504879288805e+61</li></ol>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Density estimate at mesh nodes: 5.703253e+81 2.964734e+73 0.3805663 7.85481e+145 5.937781e+164 9.175049e+61</pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
-<style>
-.list-inline {list-style: none; margin:0; padding: 0}
-.list-inline>li {display: inline-block}
-.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
-</style>
-<ol class="list-inline"><li>188.250429258502</li><li>169.175499039257</li><li>-0.966094958853127</li><li>335.93596462231</li><li>379.405290724216</li><li>142.674178384589</li></ol>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Log-density estimate at mesh nodes: 188.2504 169.1755 -0.966095 335.936 379.4053 142.6742</pre>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=8989c5e4-925c-4b0d-94c4-ec2a961fd1de">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [16]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-r"><pre><span></span><span class="c1"># Finite element function</span>
+<span class="n">f</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">fe_function</span><span class="p">(</span><span class="n">domain</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="n">mesh</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"P1"</span><span class="p">,</span><span class="w"> </span><span class="n">coeff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">model</span><span class="o">$</span><span class="n">log_density</span><span class="p">)</span>
+</pre></div>
 </div>
 </div>
 </div>
@@ -8765,15 +8607,17 @@ Figure 3: Locations of non-specific gastrointestinal symptoms reported to Nation
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [13]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [17]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-r"><pre><span></span><span class="c1"># Interactive plot</span>
-<span class="nf">display_map</span><span class="p">(</span><span class="nf">mapview</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4326</span><span class="p">,</span><span class="w"> </span><span class="n">col.regions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">inferno</span><span class="p">,</span>
+<span class="nf">display_map</span><span class="p">(</span>
+<span class="w">    </span><span class="nf">mapview</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4326</span><span class="p">,</span><span class="w"> </span><span class="n">col.regions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">inferno</span><span class="p">,</span>
 <span class="w">        </span><span class="n">na.color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"transparent"</span><span class="p">,</span><span class="w"> </span><span class="n">layer.name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"ESTIMATE"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">mapview</span><span class="p">(</span><span class="n">boundary_sf</span><span class="p">,</span>
+<span class="w">    </span><span class="nf">mapview</span><span class="p">(</span><span class="n">boundary_sf</span><span class="p">,</span>
 <span class="w">        </span><span class="n">col.regions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"gray25"</span><span class="p">,</span><span class="w"> </span><span class="n">alpha.regions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.25</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"black"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span>
-<span class="w">        </span><span class="n">legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">layer.name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"domain"</span><span class="p">))</span>
+<span class="w">        </span><span class="n">legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">layer.name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"domain"</span><span class="p">)</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>

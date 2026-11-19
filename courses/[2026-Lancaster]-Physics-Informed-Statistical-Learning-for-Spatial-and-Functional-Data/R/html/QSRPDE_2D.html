@@ -7832,7 +7832,7 @@ $$  J_\alpha(f) = \frac{1}{n} \sum_{i=1}^n \rho_{\alpha}(y_i - \mathbf{x}_i^\top
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=504d9bae">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=504d9bae">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7841,202 +7841,13 @@ $$  J_\alpha(f) = \frac{1}{n} \sum_{i=1}^n \rho_{\alpha}(y_i - \mathbf{x}_i^\top
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-r"><pre><span></span><span class="c1"># Import the fdaPDE library</span>
-<span class="nf">library</span><span class="p">(</span><span class="n">fdaPDE2</span><span class="p">)</span><span class="w">           </span><span class="c1"># v. 2.0 (2025)</span>
+<span class="nf">suppressPackageStartupMessages</span><span class="p">(</span><span class="nf">library</span><span class="p">(</span><span class="n">fdaPDE2</span><span class="p">))</span><span class="w">  </span><span class="c1"># v. 2.0 (2025)</span>
 <span class="nf">rm</span><span class="p">(</span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">ls</span><span class="p">())</span>
 
 <span class="c1"># Load additional libraries and helper functions for plotting</span>
 <span class="nf">source</span><span class="p">(</span><span class="s">"../utils/graphics.R"</span><span class="p">)</span>
-
-<span class="c1"># Keep spatial objects readable without the optional GeoJSON renderer.</span>
-<span class="nf">options</span><span class="p">(</span><span class="n">jupyter.display_mimetypes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">setdiff</span><span class="p">(</span><span class="nf">getOption</span><span class="p">(</span><span class="s">"jupyter.display_mimetypes"</span><span class="p">),</span><span class="w"> </span><span class="s">"application/geo+json"</span><span class="p">))</span>
 </pre></div>
 </div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>
-Attaching package: ‘dplyr’
-
-
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>The following objects are masked from ‘package:stats’:
-
-    filter, lag
-
-
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>The following objects are masked from ‘package:base’:
-
-    intersect, setdiff, setequal, union
-
-
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>Loading required package: ggplot2
-
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre><span class="ansi-green-fg">ℹ</span> Google's Terms of Service: <span class="ansi-blue-fg">&lt;https://mapsplatform.google.com&gt;</span>
-  Stadia Maps' Terms of Service: <span class="ansi-blue-fg">&lt;https://stadiamaps.com/terms-of-service&gt;</span>
-  OpenStreetMap's Tile Usage Policy: <span class="ansi-blue-fg">&lt;https://operations.osmfoundation.org/policies/tiles&gt;</span>
-<span class="ansi-green-fg">ℹ</span> Please cite <span class="ansi-blue-fg">ggmap</span> if you use it! Use `citation("ggmap")` for details.
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>Loading required package: sp
-
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>
-Attaching package: ‘raster’
-
-
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>The following object is masked from ‘package:dplyr’:
-
-    select
-
-
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>Linking to GEOS 3.15.0, GDAL 3.13.3, PROJ 9.8.1; sf_use_s2() is TRUE
-
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>WARNING: different compile-time and runtime versions for GEOS found:
-
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>Linked against: 3.15.0-CAPI-1.21.0 compiled against: 3.14.1-CAPI-1.20.5
-
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>It is probably a good idea to reinstall sf (and maybe lwgeom too)
-
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>Loading required package: viridisLite
-
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>Loading required package: spam
-
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>Spam version 2.9-1 (2022-08-07) is loaded.
-Type 'help( Spam)' or 'demo( spam)' for a short introduction 
-and overview of this package.
-Help for individual functions is also obtained by adding the
-suffix '.spam' to the function name, e.g. 'help( chol.spam)'.
-
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>
-Attaching package: ‘spam’
-
-
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>The following objects are masked from ‘package:base’:
-
-    backsolve, forwardsolve
-
-
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>
-Try help(fields) to get started.
-
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=2a4a2e88">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Application-to-Switzerland-rainfall-data">Application to Switzerland rainfall data<a class="anchor-link" href="#Application-to-Switzerland-rainfall-data">¶</a></h2><p>As a benchmark application in enviornmental sciences, we analyze the <strong>Switzerland rainfall dataset</strong>, which collects $462$ rainfall measurements (in $10 \, \mu m$ units) recorded on May 8, 1986. This dataset is well known in the statistical community, with several studies dedicated to its analysis, including @dubois2003mapping and @dubois2007automatic. Starting from this set of georeferenced data, the goal is to estimate spatial quantile maps of the rainfall distribution. To compare the median tendency of the phenomenon with tail behavior, we focus on the estimates for both $50\%$ and $90\%$ quantile fields, assessing whether some regions are more prone to experience extreme values and to identify potential spatial patterns associated with high-risk events.</p>
 </div>
 </div>
 </div>
@@ -8062,6 +7873,17 @@ Try help(fields) to get started.
 </div>
 </div>
 </div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=2a4a2e88">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Application-to-Switzerland-rainfall-data">Application to Switzerland rainfall data<a class="anchor-link" href="#Application-to-Switzerland-rainfall-data">¶</a></h2><p>As a benchmark application in enviornmental sciences, we analyze the <strong>Switzerland rainfall dataset</strong>, which collects $462$ rainfall measurements (in $10 \, \mu m$ units) recorded on May 8, 1986. This dataset is well known in the statistical community, with several studies dedicated to its analysis, including @dubois2003mapping and @dubois2007automatic. Starting from this set of georeferenced data, the goal is to estimate spatial quantile maps of the rainfall distribution. To compare the median tendency of the phenomenon with tail behavior, we focus on the estimates for both $50\%$ and $90\%$ quantile fields, assessing whether some regions are more prone to experience extreme values and to identify potential spatial patterns associated with high-risk events.</p>
+</div>
+</div>
+</div>
+</div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=75f117ac">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -8082,8 +7904,7 @@ Try help(fields) to get started.
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-r"><pre><span></span><span class="c1">## [SPATIAL DOMAIN]</span>
 <span class="c1"># Load the boundary nodes</span>
-<span class="n">boundary_nodes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.table</span><span class="p">(</span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"../../data/QSRPDE_2D/boundary_coords.txt"</span><span class="p">,</span>
-<span class="w">                             </span><span class="n">header</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span>
+<span class="n">boundary_nodes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.table</span><span class="p">(</span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"../../data/QSRPDE_2D/boundary_coords.txt"</span><span class="p">,</span><span class="w"> </span><span class="n">header</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span>
 <span class="nf">names</span><span class="p">(</span><span class="n">boundary_nodes</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">"lon"</span><span class="p">,</span><span class="w"> </span><span class="s">"lat"</span><span class="p">)</span>
 
 <span class="c1"># Create boundary segments (consecutive boundary nodes are connected)</span>
@@ -8116,16 +7937,17 @@ Try help(fields) to get started.
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-r"><pre><span></span><span class="c1"># Convert boundary into a sf object</span>
-<span class="n">boundary_nodes_sf</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">st_as_sf</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">rbind</span><span class="p">(</span><span class="n">boundary_nodes</span><span class="p">,</span><span class="w"> </span><span class="n">boundary_nodes</span><span class="p">[</span><span class="m">1</span><span class="p">,]),</span>
-<span class="w">                              </span><span class="n">coords</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">"lon"</span><span class="p">,</span><span class="w"> </span><span class="s">"lat"</span><span class="p">),</span><span class="w"> </span><span class="n">crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4326</span><span class="p">)</span>
-<span class="n">boundary_polygon</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">st_polygon</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="nf">st_coordinates</span><span class="p">(</span><span class="n">boundary_nodes_sf</span><span class="p">)))</span>
-<span class="n">boundary_sfc</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">st_sfc</span><span class="p">(</span><span class="n">geometry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">boundary_polygon</span><span class="p">,</span><span class="w"> </span><span class="n">crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4326</span><span class="p">)</span>
-<span class="n">boundary_sf</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">st_sf</span><span class="p">(</span><span class="n">geometry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">boundary_sfc</span><span class="p">)</span>
+<span class="n">boundary_nodes_sf</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">st_as_sf</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">rbind</span><span class="p">(</span><span class="n">boundary_nodes</span><span class="p">,</span><span class="w"> </span><span class="n">boundary_nodes</span><span class="p">[</span><span class="m">1</span><span class="p">,]),</span><span class="w"> </span><span class="n">coords</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">"lon"</span><span class="p">,</span><span class="w"> </span><span class="s">"lat"</span><span class="p">),</span><span class="w"> </span><span class="n">crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4326</span><span class="p">)</span>
+<span class="n">boundary_polygon</span><span class="w">  </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">st_polygon</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="nf">st_coordinates</span><span class="p">(</span><span class="n">boundary_nodes_sf</span><span class="p">)))</span>
+<span class="n">boundary_sfc</span><span class="w">      </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">st_sfc</span><span class="p">(</span><span class="n">geometry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">boundary_polygon</span><span class="p">,</span><span class="w"> </span><span class="n">crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4326</span><span class="p">)</span>
+<span class="n">boundary_sf</span><span class="w">       </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">st_sf</span><span class="p">(</span><span class="n">geometry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">boundary_sfc</span><span class="p">)</span>
 
 <span class="c1"># Interactive plot</span>
-<span class="nf">display_map</span><span class="p">(</span><span class="nf">mapview</span><span class="p">(</span><span class="n">boundary_sf</span><span class="p">,</span>
+<span class="nf">display_map</span><span class="p">(</span>
+<span class="w">    </span><span class="nf">mapview</span><span class="p">(</span><span class="n">boundary_sf</span><span class="p">,</span>
 <span class="w">        </span><span class="n">col.regions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"gray25"</span><span class="p">,</span><span class="w"> </span><span class="n">alpha.regions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.25</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"black"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.5</span><span class="p">,</span>
-<span class="w">        </span><span class="n">legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">layer.name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"domain"</span><span class="p">))</span>
+<span class="w">        </span><span class="n">legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">layer.name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"domain"</span><span class="p">)</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -8217,7 +8039,7 @@ Figure 1: Spatial domain of interest – Switzerland.
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=fa0b87bf">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=fa0b87bf">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8227,112 +8049,7 @@ Figure 1: Spatial domain of interest – Switzerland.
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-r"><pre><span></span><span class="c1"># Set up the triangulation for fdaPDE</span>
 <span class="n">mesh</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">triangulation</span><span class="p">(</span><span class="n">nodes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mesh</span><span class="o">$</span><span class="n">P</span><span class="p">,</span><span class="w"> </span><span class="n">cells</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mesh</span><span class="o">$</span><span class="bp">T</span><span class="p">,</span><span class="w"> </span><span class="n">boundary</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mesh</span><span class="o">$</span><span class="n">PB</span><span class="p">)</span>
-
-<span class="c1"># Nodes coordinates</span>
-<span class="nf">head</span><span class="p">(</span><span class="n">mesh</span><span class="o">$</span><span class="n">nodes</span><span class="p">)</span>
-
-<span class="c1"># Number of nodes</span>
-<span class="n">mesh</span><span class="o">$</span><span class="n">n_nodes</span>
-
-<span class="c1"># Edges</span>
-<span class="nf">head</span><span class="p">(</span><span class="n">mesh</span><span class="o">$</span><span class="n">edges</span><span class="p">)</span>
-
-<span class="c1"># Number of edges</span>
-<span class="n">mesh</span><span class="o">$</span><span class="n">n_edges</span>
-
-<span class="c1"># Triangles</span>
-<span class="nf">head</span><span class="p">(</span><span class="n">mesh</span><span class="o">$</span><span class="n">cells</span><span class="p">)</span>
-
-<span class="c1"># Number of triangles</span>
-<span class="n">mesh</span><span class="o">$</span><span class="n">n_cells</span>
-
-<span class="c1"># Bounding box</span>
-<span class="n">mesh</span><span class="o">$</span><span class="n">bbox</span>
 </pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
-<table class="dataframe">
-<caption>A matrix: 6 × 2 of type dbl</caption>
-<tbody>
-<tr><td> 9.658689</td><td>47.13001</td></tr>
-<tr><td> 9.863359</td><td>47.10578</td></tr>
-<tr><td> 9.971987</td><td>47.01739</td></tr>
-<tr><td>10.090422</td><td>46.95084</td></tr>
-<tr><td>10.201739</td><td>46.95443</td></tr>
-<tr><td>10.301752</td><td>47.03821</td></tr>
-</tbody>
-</table>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
-1118
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
-<table class="dataframe">
-<caption>A matrix: 6 × 2 of type dbl</caption>
-<tbody>
-<tr><td>  51</td><td>1046</td></tr>
-<tr><td>  51</td><td>1045</td></tr>
-<tr><td>1045</td><td>1046</td></tr>
-<tr><td> 112</td><td> 252</td></tr>
-<tr><td> 112</td><td> 137</td></tr>
-<tr><td> 137</td><td> 252</td></tr>
-</tbody>
-</table>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
-3177
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
-<table class="dataframe">
-<caption>A matrix: 6 × 3 of type dbl</caption>
-<tbody>
-<tr><td>  51</td><td>1046</td><td>1045</td></tr>
-<tr><td> 112</td><td> 252</td><td> 137</td></tr>
-<tr><td> 949</td><td> 946</td><td> 932</td></tr>
-<tr><td>  97</td><td>  92</td><td> 102</td></tr>
-<tr><td>  49</td><td>  48</td><td> 328</td></tr>
-<tr><td>1042</td><td>  86</td><td>1043</td></tr>
-</tbody>
-</table>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
-2060
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
-<table class="dataframe">
-<caption>A matrix: 2 × 2 of type dbl</caption>
-<tbody>
-<tr><td> 5.909523</td><td>45.79278</td></tr>
-<tr><td>10.584031</td><td>47.83220</td></tr>
-</tbody>
-</table>
 </div>
 </div>
 </div>
@@ -8357,11 +8074,13 @@ Figure 1: Spatial domain of interest – Switzerland.
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-r"><pre><span></span><span class="c1"># Interactive plot</span>
-<span class="nf">display_map</span><span class="p">(</span><span class="nf">mapview</span><span class="p">(</span><span class="n">boundary_sf</span><span class="p">,</span>
+<span class="nf">display_map</span><span class="p">(</span>
+<span class="w">    </span><span class="nf">mapview</span><span class="p">(</span><span class="n">boundary_sf</span><span class="p">,</span>
 <span class="w">        </span><span class="n">col.regions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"gray25"</span><span class="p">,</span><span class="w"> </span><span class="n">alpha.regions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.25</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"black"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.5</span><span class="p">,</span>
 <span class="w">        </span><span class="n">legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">layer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"domain"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">mapview</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span><span class="w"> </span><span class="n">crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4326</span><span class="p">,</span>
-<span class="w">          </span><span class="n">col.regions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"transparent"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.25</span><span class="p">,</span><span class="w"> </span><span class="n">legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">layer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"mesh"</span><span class="p">))</span>
+<span class="w">    </span><span class="nf">mapview</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span><span class="w"> </span><span class="n">crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4326</span><span class="p">,</span>
+<span class="w">          </span><span class="n">col.regions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"transparent"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.25</span><span class="p">,</span><span class="w"> </span><span class="n">legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">layer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"mesh"</span><span class="p">)</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -8458,23 +8177,16 @@ Figure 2: Regular mesh of the Switzerland domain with $1\,128$ nodes and $2\,077
 <span class="c1"># Load the data</span>
 <span class="n">locations</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.table</span><span class="p">(</span><span class="s">"../../data/QSRPDE_2D/locations.txt"</span><span class="p">)</span>
 <span class="n">log_rainfall</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">scan</span><span class="p">(</span><span class="s">"../../data/QSRPDE_2D/log_rainfall.txt"</span><span class="p">)</span>
-<span class="n">data</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span><span class="n">lon</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">locations</span><span class="p">[[</span><span class="m">1</span><span class="p">]],</span><span class="w"> </span><span class="n">lat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">locations</span><span class="p">[[</span><span class="m">2</span><span class="p">]],</span>
-<span class="w">                   </span><span class="n">rainfall</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">exp</span><span class="p">(</span><span class="n">log_rainfall</span><span class="p">),</span><span class="w"> </span><span class="n">log.rainfall</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">log_rainfall</span><span class="p">)</span>
-<span class="nf">head</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">data</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span>
+<span class="w">    </span><span class="n">lon</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="n">locations</span><span class="p">[[</span><span class="m">1</span><span class="p">]],</span><span class="w"> </span>
+<span class="w">    </span><span class="n">lat</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="n">locations</span><span class="p">[[</span><span class="m">2</span><span class="p">]],</span>
+<span class="w">    </span><span class="n">rainfall</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="nf">exp</span><span class="p">(</span><span class="n">log_rainfall</span><span class="p">),</span><span class="w"> </span>
+<span class="w">    </span><span class="n">log.rainfall</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">log_rainfall</span>
+<span class="p">)</span>
 
 <span class="c1"># Add layer with data to the geoframe object</span>
-<span class="n">switzerland</span><span class="o">$</span><span class="nf">insert</span><span class="p">(</span><span class="n">layer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"rainfall"</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"point"</span><span class="p">,</span><span class="w"> </span><span class="n">geo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">"lon"</span><span class="p">,</span><span class="w"> </span><span class="s">"lat"</span><span class="p">),</span><span class="w"> </span>
-<span class="w">                   </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="p">)</span>
+<span class="n">switzerland</span><span class="o">$</span><span class="nf">insert</span><span class="p">(</span><span class="n">layer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"rainfall"</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"point"</span><span class="p">,</span><span class="w"> </span><span class="n">geo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">"lon"</span><span class="p">,</span><span class="w"> </span><span class="s">"lat"</span><span class="p">),</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="p">)</span>
 <span class="n">switzerland</span>
-
-<span class="c1"># Variable names</span>
-<span class="nf">names</span><span class="p">(</span><span class="n">switzerland</span><span class="p">[[</span><span class="s">"rainfall"</span><span class="p">]])</span>
-
-<span class="c1"># Number of variables</span>
-<span class="nf">ncol</span><span class="p">(</span><span class="n">switzerland</span><span class="p">[[</span><span class="s">"rainfall"</span><span class="p">]])</span>
-
-<span class="c1"># Locations of measurement stations (lon, lat)</span>
-<span class="nf">head</span><span class="p">(</span><span class="nf">gf_locations</span><span class="p">(</span><span class="n">switzerland</span><span class="p">[[</span><span class="s">"rainfall"</span><span class="p">]]))</span>
 </pre></div>
 </div>
 </div>
@@ -8484,26 +8196,6 @@ Figure 2: Regular mesh of the Switzerland domain with $1\,128$ nodes and $2\,077
 <div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
-<table class="dataframe">
-<caption>A data.frame: 6 × 4</caption>
-<thead>
-<tr><th></th><th scope="col">lon</th><th scope="col">lat</th><th scope="col">rainfall</th><th scope="col">log.rainfall</th></tr>
-<tr><th></th><th scope="col">&lt;dbl&gt;</th><th scope="col">&lt;dbl&gt;</th><th scope="col">&lt;dbl&gt;</th><th scope="col">&lt;dbl&gt;</th></tr>
-</thead>
-<tbody>
-<tr><th scope="row">1</th><td>8.585260</td><td>47.77857</td><td>1.84</td><td>0.6097656</td></tr>
-<tr><th scope="row">2</th><td>8.637467</td><td>47.74956</td><td>1.21</td><td>0.1906204</td></tr>
-<tr><th scope="row">3</th><td>8.443961</td><td>47.74597</td><td>1.38</td><td>0.3220835</td></tr>
-<tr><th scope="row">4</th><td>8.760957</td><td>47.72186</td><td>1.26</td><td>0.2311117</td></tr>
-<tr><th scope="row">5</th><td>8.425719</td><td>47.69566</td><td>1.56</td><td>0.4446858</td></tr>
-<tr><th scope="row">6</th><td>8.701118</td><td>47.69077</td><td>1.00</td><td>0.0000000</td></tr>
-</tbody>
-</table>
-</div>
-</div>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
@@ -8524,39 +8216,6 @@ rainfall log.rainfall
 1.26     0.231112     
 1.56     0.444686     
 1        0            </pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
-<style>
-.list-inline {list-style: none; margin:0; padding: 0}
-.list-inline>li {display: inline-block}
-.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
-</style>
-<ol class="list-inline"><li>'rainfall'</li><li>'log.rainfall'</li></ol>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
-2
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
-<table class="dataframe">
-<caption>A matrix: 6 × 2 of type dbl</caption>
-<tbody>
-<tr><td>8.585260</td><td>47.77857</td></tr>
-<tr><td>8.637467</td><td>47.74956</td></tr>
-<tr><td>8.443961</td><td>47.74597</td></tr>
-<tr><td>8.760957</td><td>47.72186</td></tr>
-<tr><td>8.425719</td><td>47.69566</td></tr>
-<tr><td>8.701118</td><td>47.69077</td></tr>
-</tbody>
-</table>
 </div>
 </div>
 </div>
@@ -8580,16 +8239,20 @@ rainfall log.rainfall
 <div class="jp-InputPrompt jp-InputArea-prompt">In [10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-r"><pre><span></span><span class="n">map1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">mapview</span><span class="p">(</span><span class="n">switzerland</span><span class="p">[[</span><span class="s">"rainfall"</span><span class="p">]],</span><span class="w"> </span><span class="n">varnames</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"rainfall"</span><span class="p">,</span><span class="w"> </span><span class="n">crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4326</span><span class="p">,</span>
-<span class="w">                </span><span class="n">color_palettes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="s">"mako"</span><span class="p">),</span><span class="w"> </span><span class="n">na.color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"transparent"</span><span class="p">,</span>
-<span class="w">                </span><span class="n">layer.name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"rainfall"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">mapview</span><span class="p">(</span><span class="n">boundary_sf</span><span class="p">,</span><span class="w"> </span><span class="n">col.regions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"transparent"</span><span class="p">,</span><span class="w"> </span><span class="n">alpha.regions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span>
+<div class="highlight hl-r"><pre><span></span><span class="n">map1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">mapview</span><span class="p">(</span><span class="n">switzerland</span><span class="p">[[</span><span class="s">"rainfall"</span><span class="p">]],</span><span class="w"> </span>
+<span class="w">          </span><span class="n">varnames</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"rainfall"</span><span class="p">,</span><span class="w"> </span><span class="n">crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4326</span><span class="p">,</span>
+<span class="w">          </span><span class="n">color_palettes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="s">"mako"</span><span class="p">),</span><span class="w"> </span><span class="n">na.color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"transparent"</span><span class="p">,</span>
+<span class="w">          </span><span class="n">layer.name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"rainfall"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">        </span><span class="nf">mapview</span><span class="p">(</span><span class="n">boundary_sf</span><span class="p">,</span><span class="w"> </span>
+<span class="w">          </span><span class="n">col.regions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"transparent"</span><span class="p">,</span><span class="w"> </span><span class="n">alpha.regions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span>
 <span class="w">          </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"black"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.5</span><span class="p">,</span><span class="w"> </span><span class="n">layer.name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"domain"</span><span class="p">,</span><span class="w"> </span><span class="n">legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span>
 
-<span class="n">map2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">mapview</span><span class="p">(</span><span class="n">switzerland</span><span class="p">[[</span><span class="s">"rainfall"</span><span class="p">]],</span><span class="w"> </span><span class="n">crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4326</span><span class="p">,</span><span class="w"> </span><span class="n">varnames</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"log.rainfall"</span><span class="p">,</span>
-<span class="w">                </span><span class="n">color_palettes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="s">"mako"</span><span class="p">),</span><span class="w"> </span><span class="n">na.color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"transparent"</span><span class="p">,</span>
-<span class="w">                </span><span class="n">layer.name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"log.rainfall"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">  </span><span class="nf">mapview</span><span class="p">(</span><span class="n">boundary_sf</span><span class="p">,</span><span class="w"> </span><span class="n">col.regions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"transparent"</span><span class="p">,</span><span class="w"> </span><span class="n">alpha.regions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span>
+<span class="n">map2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">mapview</span><span class="p">(</span><span class="n">switzerland</span><span class="p">[[</span><span class="s">"rainfall"</span><span class="p">]],</span><span class="w"> </span>
+<span class="w">          </span><span class="n">crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4326</span><span class="p">,</span><span class="w"> </span><span class="n">varnames</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"log.rainfall"</span><span class="p">,</span>
+<span class="w">          </span><span class="n">color_palettes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="s">"mako"</span><span class="p">),</span><span class="w"> </span><span class="n">na.color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"transparent"</span><span class="p">,</span>
+<span class="w">          </span><span class="n">layer.name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"log.rainfall"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">        </span><span class="nf">mapview</span><span class="p">(</span><span class="n">boundary_sf</span><span class="p">,</span><span class="w"> </span>
+<span class="w">          </span><span class="n">col.regions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"transparent"</span><span class="p">,</span><span class="w"> </span><span class="n">alpha.regions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span>
 <span class="w">          </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"black"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.5</span><span class="p">,</span><span class="w"> </span><span class="n">layer.name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"domain"</span><span class="p">,</span><span class="w"> </span><span class="n">legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span>
 
 <span class="nf">display_map</span><span class="p">(</span><span class="nf">sync</span><span class="p">(</span><span class="n">map1</span><span class="p">,</span><span class="w"> </span><span class="n">map2</span><span class="p">))</span>
@@ -8725,14 +8388,11 @@ The anisotropy tensor $\mathbf{K}$ is estimated using the <strong>parameter casc
 <span class="n">lambda_grid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="o">^</span><span class="nf">seq</span><span class="p">(</span><span class="n">from</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">-7</span><span class="p">,</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">-3</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.2</span><span class="p">)</span>
 
 <span class="c1"># Physics informed smoothing model</span>
-<span class="n">m</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">qsr</span><span class="p">(</span><span class="n">log.rainfall</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">switzerland</span><span class="p">,</span><span class="w"> </span><span class="n">level</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span>
-<span class="w">         </span><span class="n">penalty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">fe_elliptic</span><span class="p">(</span><span class="n">K</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">K</span><span class="p">)</span>
-<span class="p">)</span>
+<span class="n">m</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">qsr</span><span class="p">(</span><span class="n">log.rainfall</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">switzerland</span><span class="p">,</span><span class="w"> </span><span class="n">level</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="n">penalty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">fe_elliptic</span><span class="p">(</span><span class="n">K</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">K</span><span class="p">))</span>
 
 <span class="c1"># Physics informed smoothing fit with grid search for GCV minimization</span>
 <span class="n">fit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m</span><span class="o">$</span><span class="nf">fit</span><span class="p">(</span>
-<span class="w">  </span><span class="n">calibrator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">gcv</span><span class="p">(</span><span class="n">optimizer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">grid_search</span><span class="p">(</span><span class="n">grid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lambda_grid</span><span class="p">),</span>
-<span class="w">                   </span><span class="n">seed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">425</span><span class="p">)</span>
+<span class="w">  </span><span class="n">calibrator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">gcv</span><span class="p">(</span><span class="n">optimizer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">grid_search</span><span class="p">(</span><span class="n">grid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lambda_grid</span><span class="p">),</span><span class="w"> </span><span class="n">seed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">425</span><span class="p">)</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -8763,7 +8423,7 @@ The anisotropy tensor $\mathbf{K}$ is estimated using the <strong>parameter casc
 
 <span class="c1"># Optimal value selected for the smoothing parameter</span>
 <span class="n">lambda_opt_grid</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">fit</span><span class="o">$</span><span class="n">optimum</span>
-<span class="n">lambda_opt_grid</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">"Optimal lambda value:"</span><span class="p">,</span><span class="w"> </span><span class="n">lambda_opt_grid</span><span class="p">)</span>
 
 <span class="c1"># Plot of the GCV curve</span>
 <span class="nf">par</span><span class="p">(</span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"serif"</span><span class="p">)</span>
@@ -8784,8 +8444,8 @@ The anisotropy tensor $\mathbf{K}$ is estimated using the <strong>parameter casc
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
-1e-05
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Optimal lambda value: 1e-05</pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
@@ -9794,15 +9454,19 @@ Figure 4: GCV curve for the $50\%$ quantile field.
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-r"><pre><span></span><span class="c1"># Interactive plot</span>
-<span class="n">map_log50</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">mapview</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4326</span><span class="p">,</span><span class="w"> </span><span class="n">col.regions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mako</span><span class="p">,</span>
-<span class="w">                     </span><span class="n">na.color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"transparent"</span><span class="p">,</span><span class="w"> </span><span class="n">layer.name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"log.rainfall"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">         </span><span class="nf">mapview</span><span class="p">(</span><span class="n">boundary_sf</span><span class="p">,</span><span class="w"> </span><span class="n">col.regions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"transparent"</span><span class="p">,</span><span class="w"> </span><span class="n">alpha.regions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span>
-<span class="w">                 </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"black"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.5</span><span class="p">,</span><span class="w"> </span><span class="n">layer.name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"domain"</span><span class="p">,</span><span class="w"> </span><span class="n">legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span>
+<span class="n">map_log50</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">mapview</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="w"> </span>
+<span class="w">               </span><span class="n">crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4326</span><span class="p">,</span><span class="w"> </span><span class="n">col.regions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mako</span><span class="p">,</span>
+<span class="w">               </span><span class="n">na.color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"transparent"</span><span class="p">,</span><span class="w"> </span><span class="n">layer.name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"log.rainfall"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">             </span><span class="nf">mapview</span><span class="p">(</span><span class="n">boundary_sf</span><span class="p">,</span><span class="w"> </span>
+<span class="w">               </span><span class="n">col.regions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"transparent"</span><span class="p">,</span><span class="w"> </span><span class="n">alpha.regions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span>
+<span class="w">               </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"black"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.5</span><span class="p">,</span><span class="w"> </span><span class="n">layer.name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"domain"</span><span class="p">,</span><span class="w"> </span><span class="n">legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span>
 
-<span class="n">map_50</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">mapview</span><span class="p">(</span><span class="nf">exp</span><span class="p">(</span><span class="n">f</span><span class="p">),</span><span class="w"> </span><span class="n">crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4326</span><span class="p">,</span><span class="w"> </span><span class="n">col.regions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mako</span><span class="p">,</span>
-<span class="w">                 </span><span class="n">na.color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"transparent"</span><span class="p">,</span><span class="w"> </span><span class="n">layer.name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"rainfall"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">         </span><span class="nf">mapview</span><span class="p">(</span><span class="n">boundary_sf</span><span class="p">,</span><span class="w"> </span><span class="n">col.regions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"transparent"</span><span class="p">,</span><span class="w"> </span><span class="n">alpha.regions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span>
-<span class="w">                </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"black"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.5</span><span class="p">,</span><span class="w"> </span><span class="n">layer.name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"domain"</span><span class="p">,</span><span class="w"> </span><span class="n">legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span>
+<span class="n">map_50</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">mapview</span><span class="p">(</span><span class="nf">exp</span><span class="p">(</span><span class="n">f</span><span class="p">),</span><span class="w"> </span>
+<span class="w">            </span><span class="n">crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4326</span><span class="p">,</span><span class="w"> </span><span class="n">col.regions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mako</span><span class="p">,</span>
+<span class="w">            </span><span class="n">na.color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"transparent"</span><span class="p">,</span><span class="w"> </span><span class="n">layer.name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"rainfall"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">          </span><span class="nf">mapview</span><span class="p">(</span><span class="n">boundary_sf</span><span class="p">,</span><span class="w"> </span>
+<span class="w">            </span><span class="n">col.regions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"transparent"</span><span class="p">,</span><span class="w"> </span><span class="n">alpha.regions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span>
+<span class="w">            </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"black"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.5</span><span class="p">,</span><span class="w"> </span><span class="n">layer.name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"domain"</span><span class="p">,</span><span class="w"> </span><span class="n">legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span>
 
 <span class="nf">display_map</span><span class="p">(</span><span class="nf">sync</span><span class="p">(</span><span class="n">map_log50</span><span class="p">,</span><span class="w"> </span><span class="n">map_50</span><span class="p">))</span>
 </pre></div>
@@ -9910,14 +9574,11 @@ Figure 5: Rainfall $50\%$ quantile estimate in the logarithmic scale computed by
 <span class="n">lambda_grid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="o">^</span><span class="nf">seq</span><span class="p">(</span><span class="n">from</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">-7</span><span class="p">,</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">-4</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.2</span><span class="p">)</span>
 
 <span class="c1"># Physics informed smoothing model</span>
-<span class="n">m</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">qsr</span><span class="p">(</span><span class="n">log.rainfall</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">switzerland</span><span class="p">,</span><span class="w"> </span><span class="n">level</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.9</span><span class="p">,</span><span class="w"> </span>
-<span class="w">         </span><span class="n">penalty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">fe_elliptic</span><span class="p">(</span><span class="n">K</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">K</span><span class="p">)</span>
-<span class="p">)</span>
+<span class="n">m</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">qsr</span><span class="p">(</span><span class="n">log.rainfall</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">switzerland</span><span class="p">,</span><span class="w"> </span><span class="n">level</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.9</span><span class="p">,</span><span class="w"> </span><span class="n">penalty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">fe_elliptic</span><span class="p">(</span><span class="n">K</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">K</span><span class="p">))</span>
 
 <span class="c1"># Physics informed smoothing fit with grid search for GCV minimization</span>
 <span class="n">fit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m</span><span class="o">$</span><span class="nf">fit</span><span class="p">(</span>
-<span class="w">  </span><span class="n">calibrator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">gcv</span><span class="p">(</span><span class="n">optimizer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">grid_search</span><span class="p">(</span><span class="n">grid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lambda_grid</span><span class="p">),</span>
-<span class="w">                   </span><span class="n">seed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">425</span><span class="p">)</span>
+<span class="w">  </span><span class="n">calibrator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">gcv</span><span class="p">(</span><span class="n">optimizer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">grid_search</span><span class="p">(</span><span class="n">grid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lambda_grid</span><span class="p">),</span><span class="w"> </span><span class="n">seed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">425</span><span class="p">)</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -9948,7 +9609,7 @@ Figure 5: Rainfall $50\%$ quantile estimate in the logarithmic scale computed by
 
 <span class="c1"># Optimal value selected for the smoothing parameter</span>
 <span class="n">lambda_opt_grid</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">fit</span><span class="o">$</span><span class="n">optimum</span>
-<span class="n">lambda_opt_grid</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">"Optimal lambda value:"</span><span class="p">,</span><span class="w"> </span><span class="n">lambda_opt_grid</span><span class="p">)</span>
 
 <span class="c1"># Plot of the GCV curve</span>
 <span class="nf">par</span><span class="p">(</span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"serif"</span><span class="p">)</span>
@@ -9969,8 +9630,8 @@ Figure 5: Rainfall $50\%$ quantile estimate in the logarithmic scale computed by
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
-2.51188643150958e-06
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Optimal lambda value: 2.511886e-06</pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
@@ -10967,15 +10628,19 @@ Figure 6: GCV curve for the $90\%$ quantile field.
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-r"><pre><span></span><span class="c1"># Interactive plot</span>
-<span class="n">map_log90</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">mapview</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4326</span><span class="p">,</span><span class="w"> </span><span class="n">col.regions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mako</span><span class="p">,</span>
-<span class="w">                     </span><span class="n">na.color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"transparent"</span><span class="p">,</span><span class="w"> </span><span class="n">layer.name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"log.rainfall"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">         </span><span class="nf">mapview</span><span class="p">(</span><span class="n">boundary_sf</span><span class="p">,</span><span class="w"> </span><span class="n">col.regions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"transparent"</span><span class="p">,</span><span class="w"> </span><span class="n">alpha.regions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span>
-<span class="w">                 </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"black"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.5</span><span class="p">,</span><span class="w"> </span><span class="n">layer.name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"domain"</span><span class="p">,</span><span class="w"> </span><span class="n">legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span>
+<span class="n">map_log90</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">mapview</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="w"> </span>
+<span class="w">               </span><span class="n">crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4326</span><span class="p">,</span><span class="w"> </span><span class="n">col.regions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mako</span><span class="p">,</span>
+<span class="w">               </span><span class="n">na.color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"transparent"</span><span class="p">,</span><span class="w"> </span><span class="n">layer.name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"log.rainfall"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">         </span><span class="nf">mapview</span><span class="p">(</span><span class="n">boundary_sf</span><span class="p">,</span><span class="w"> </span>
+<span class="w">           </span><span class="n">col.regions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"transparent"</span><span class="p">,</span><span class="w"> </span><span class="n">alpha.regions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span>
+<span class="w">           </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"black"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.5</span><span class="p">,</span><span class="w"> </span><span class="n">layer.name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"domain"</span><span class="p">,</span><span class="w"> </span><span class="n">legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span>
 
-<span class="n">map_90</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">mapview</span><span class="p">(</span><span class="nf">exp</span><span class="p">(</span><span class="n">f</span><span class="p">),</span><span class="w"> </span><span class="n">crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4326</span><span class="p">,</span><span class="w"> </span><span class="n">col.regions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mako</span><span class="p">,</span>
-<span class="w">                 </span><span class="n">na.color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"transparent"</span><span class="p">,</span><span class="w"> </span><span class="n">layer.name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"rainfall"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">         </span><span class="nf">mapview</span><span class="p">(</span><span class="n">boundary_sf</span><span class="p">,</span><span class="w"> </span><span class="n">col.regions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"transparent"</span><span class="p">,</span><span class="w"> </span><span class="n">alpha.regions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span>
-<span class="w">                </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"black"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.5</span><span class="p">,</span><span class="w"> </span><span class="n">layer.name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"domain"</span><span class="p">,</span><span class="w"> </span><span class="n">legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span>
+<span class="n">map_90</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">mapview</span><span class="p">(</span><span class="nf">exp</span><span class="p">(</span><span class="n">f</span><span class="p">),</span><span class="w"> </span>
+<span class="w">            </span><span class="n">crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4326</span><span class="p">,</span><span class="w"> </span><span class="n">col.regions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mako</span><span class="p">,</span>
+<span class="w">            </span><span class="n">na.color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"transparent"</span><span class="p">,</span><span class="w"> </span><span class="n">layer.name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"rainfall"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">          </span><span class="nf">mapview</span><span class="p">(</span><span class="n">boundary_sf</span><span class="p">,</span><span class="w"> </span>
+<span class="w">            </span><span class="n">col.regions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"transparent"</span><span class="p">,</span><span class="w"> </span><span class="n">alpha.regions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span>
+<span class="w">            </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"black"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.5</span><span class="p">,</span><span class="w"> </span><span class="n">layer.name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"domain"</span><span class="p">,</span><span class="w"> </span><span class="n">legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span>
 
 <span class="nf">display_map</span><span class="p">(</span><span class="nf">sync</span><span class="p">(</span><span class="n">map_log90</span><span class="p">,</span><span class="w"> </span><span class="n">map_90</span><span class="p">))</span>
 </pre></div>
