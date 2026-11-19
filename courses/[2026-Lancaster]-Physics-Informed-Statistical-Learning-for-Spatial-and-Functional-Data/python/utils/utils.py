@@ -12,10 +12,18 @@ import base64
 from io import BytesIO
 import matplotlib
 import branca.colormap as bcm
+from xyzservices import providers
 import matplotlib.colors as mcolors
 from shapely.geometry import Polygon, Point
 import rasterio
 import rasterio.warp
+
+providers.CartoDB.Positron["apikey"] = "cb1_5c8u_1_34f3cdea1c79c9464ffcccfc"
+
+
+def _display_map(m, height="720px"):
+    m.get_root().height = height
+    display(m.get_root())
 
 
 # Function to plot mesh
@@ -38,7 +46,7 @@ def plot_mesh(
     mesh_weight=0.8,
     mesh_opacity=0.8,
     mesh_show=True,
-    map_height="500px"   
+    map_height="720px"
 ):
     """
     Plot a spatial domain and a triangular mesh on an interactive Folium map.
@@ -122,6 +130,7 @@ def plot_mesh(
         location=map_location,
         zoom_start=zoom_start,
         tiles=tiles,
+        zoom_snap=0.25,
         width="100%",
         height=map_height
     )
@@ -162,20 +171,9 @@ def plot_mesh(
     mesh_fg.add_to(m)
 
     folium.LayerControl(collapsed=False).add_to(m)
-
-    # --- Display forcing height ---
-    iframe_html = m._repr_html_()
-    display(HTML(f"""
-    <div style="width:100%; height:{map_height}; margin:0; padding:0;">
-        <style>
-            iframe {{
-                width: 100% !important;
-                height: {map_height} !important;
-            }}
-        </style>
-        {iframe_html}
-    </div>
-    """))
+    m.fit_bounds([[nodes[:, 1].min(), nodes[:, 0].min()],
+                  [nodes[:, 1].max(), nodes[:, 0].max()]])
+    _display_map(m, map_height)
 
 # Function to plot areal data
 def plot_areal_data(
@@ -222,8 +220,9 @@ def plot_areal_data(
         location=map_location,
         zoom_start=zoom_start,
         tiles=tiles,
+        zoom_snap=0.25,
         width="100%",
-        height="600px"
+        height="720px"
     )
 
     # Colormap / palette
@@ -281,18 +280,8 @@ def plot_areal_data(
     if show_layer_control:
         folium.LayerControl(collapsed=False).add_to(m)
 
-    html = m.get_root()._repr_html_()
-    HTML(f"""
-    <div style="
-        width: 100%;
-        height: 600px;
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-    ">
-        {html}
-    </div>
-    """)
+    m.fit_bounds([[domain.total_bounds[1], domain.total_bounds[0]],
+                  [domain.total_bounds[3], domain.total_bounds[2]]])
 
     return m
 
@@ -314,7 +303,7 @@ def plot_domain(
     show_layer=True,
     show_layer_control=True,
     popup_label = None,
-    map_height="500px" 
+    map_height="720px"
 ):
     """
     Plot a spatial domain on an interactive Folium map.
@@ -394,7 +383,7 @@ def plot_domain(
             ]
 
         # Create map
-        m = folium.Map(location=map_location, zoom_start=zoom_start, tiles=tiles, width="100%", height="600px" ) 
+        m = folium.Map(location=map_location, zoom_start=zoom_start, tiles=tiles, zoom_snap=0.25)
 
 
         # Feature group
@@ -431,7 +420,8 @@ def plot_domain(
         center = [centroid.y.mean(), centroid.x.mean()]
 
         # Create map
-        m = folium.Map(location=center, zoom_start=zoom_start, tiles=tiles)
+        m = folium.Map(location=map_location if map_location is not None else center,
+                       zoom_start=zoom_start, tiles=tiles, zoom_snap=0.25)
 
         # Feature group
         domain_fg = folium.FeatureGroup(name=layer_name, show=show_layer)
@@ -469,19 +459,12 @@ def plot_domain(
     if show_layer_control:
         folium.LayerControl(collapsed=False).add_to(m)
 
-    # --- Display forcing height ---
-    iframe_html = m._repr_html_()
-    display(HTML(f"""
-    <div style="width:100%; height:{map_height}; margin:0; padding:0;">
-        <style>
-            iframe {{
-                width: 100% !important;
-                height: {map_height} !important;
-            }}
-        </style>
-        {iframe_html}
-    </div>
-    """))
+    bounds = (boundary_nodes[:, 1].min(), boundary_nodes[:, 0].min(),
+              boundary_nodes[:, 1].max(), boundary_nodes[:, 0].max()) if boundary_nodes is not None else (
+              domain.total_bounds[0], domain.total_bounds[1],
+              domain.total_bounds[2], domain.total_bounds[3])
+    m.fit_bounds([[bounds[1], bounds[0]], [bounds[3], bounds[2]]])
+    _display_map(m, map_height)
 
 # Function to plot locations
 def plot_locations(
@@ -598,7 +581,8 @@ def plot_locations(
     m = folium.Map(
         location=map_center,
         zoom_start=zoom_start,
-        tiles=tiles
+        tiles=tiles,
+        zoom_snap=0.25
     )
 
     # --------------------------------------------------
@@ -654,18 +638,11 @@ def plot_locations(
     # --------------------------------------------------
     folium.LayerControl(collapsed=False).add_to(m)
 
-    html = m.get_root()._repr_html_()
-    HTML(f"""
-    <div style="
-        width: 100%;
-        height: 600px;
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-    ">
-        {html}
-    </div>
-    """)
+    bounds = domain.total_bounds if domain_shape is not None else np.array([
+        boundary_nodes[:, 1].min(), boundary_nodes[:, 0].min(),
+        boundary_nodes[:, 1].max(), boundary_nodes[:, 0].max()])
+    m.fit_bounds([[bounds[1], bounds[0]], [bounds[3], bounds[2]]])
+    m.get_root().height = "720px"
 
     return m
 
@@ -766,8 +743,9 @@ def plot_areal_estimate(
         location=map_location,
         zoom_start=zoom_start,
         tiles=tiles,
+        zoom_snap=0.25,
         width="100%",
-        height="600px"
+        height="720px"
     )
 
     # --- Colormap ---
@@ -824,18 +802,8 @@ def plot_areal_estimate(
     if show_layer_control:
         folium.LayerControl(collapsed=False).add_to(m)
 
-    html = m.get_root()._repr_html_()
-    HTML(f"""
-    <div style="
-        width: 100%;
-        height: 600px;
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-    ">
-        {html}
-    </div>
-    """)
+    m.fit_bounds([[domain.total_bounds[1], domain.total_bounds[0]],
+                  [domain.total_bounds[3], domain.total_bounds[2]]])
 
     return m
 
@@ -868,7 +836,7 @@ def display_satellite_data(
     vmax = np.nanmax(data)
 
     if palette is not None:
-        colormap = bc.LinearColormap(
+        colormap = bcm.LinearColormap(
             colors=palette, vmin=vmin, vmax=vmax, caption=layer_name
         )
         norm = mcolors.Normalize(vmin=vmin, vmax=vmax)
@@ -892,7 +860,7 @@ def display_satellite_data(
         rgba_img = cmap(norm(data))
         rgba_img = (rgba_img * 255).astype(np.uint8)
 
-        colormap = bc.LinearColormap(
+        colormap = bcm.LinearColormap(
             colors=[cmap(i) for i in np.linspace(0, 1, 256)],
             vmin=vmin,
             vmax=vmax,
@@ -910,6 +878,7 @@ def display_satellite_data(
         location= map_location,
         zoom_start=zoom_start,
         tiles=tiles,
+        zoom_snap=0.25,
     )
 
     if boundary_nodes is not None:
@@ -950,18 +919,8 @@ def display_satellite_data(
     colormap.add_to(m)
     folium.LayerControl(collapsed=False).add_to(m)
 
-    html = m.get_root()._repr_html_()
-    HTML(f"""
-    <div style="
-        width: 100%;
-        height: 600px;
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-    ">
-    {html}
-    </div>
-    """)
+    m.fit_bounds([[bounds.bottom, bounds.left], [bounds.top, bounds.right]])
+    m.get_root().height = "720px"
 
     return m
 
@@ -970,7 +929,7 @@ def display_folium_map(
     maps,
     nrows = 1,
     ncols = 1,
-    cell_height="550px",  
+    cell_height="720px",
     gap="10px"
 ):
     if len(maps) > nrows * ncols:
@@ -980,29 +939,8 @@ def display_folium_map(
 
     map_divs = []
     for m in maps:
-        map_divs.append(
-            f"""
-            <div style="
-                width: 100%;
-                height: {cell_height};
-                position: relative;
-            ">
-                <style>
-                    iframe {{
-                        width: 100% !important;
-                        height: {cell_height} !important;
-                    }}
-                </style>
-                {m.get_root()._repr_html_()}
-            </div>
-            """
-        )
-
-    # celle vuote
-    for _ in range(nrows * ncols - len(maps)):
-        map_divs.append(
-            f'<div style="width:100%; height:{cell_height};"></div>'
-        )
+        m.get_root().height = cell_height
+        map_divs.append(m.get_root()._repr_html_())
 
     grid_html = f"""
     <div style="
@@ -1026,12 +964,6 @@ def _mpl_fig_to_html(fig, dpi=150):
     buf.seek(0)
     img_base64 = base64.b64encode(buf.read()).decode("utf-8")
 
-    # Larghezza al 100% della cella, altezza auto, centrata
-    html = f"""
-    <div style="display:flex; justify-content:center; align-items:center; width:100%; height:100%;">
-        <img src="data:image/png;base64,{img_base64}"
-             style="max-width:100%; max-height:100%; height:auto; width:auto;">
-    </div>
-    """
-    return html
+    return (f'<img src="data:image/png;base64,{img_base64}" '
+            'style="display:block; max-width:100%; height:auto; margin:auto;">')
 
