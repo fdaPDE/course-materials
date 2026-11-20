@@ -1,0 +1,15 @@
+dplyr
+fields
+ggmap
+ggplot2
+latex2exp
+leafsync
+mapview
+raster
+RTriangle
+sf
+viridis
+devtools
+Rcpp
+RcppEigen
+R6
