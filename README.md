@@ -5,3 +5,4 @@ Collection of teaching materials and practical examples for courses and workshop
 
 * [Limerick, 2025 - International Workshop on Statistical Modeling](courses/[2025-Limerick]-International-Workshop-on-Statistical-Modeling/)
 * [Rome, 2026 - Advanced Topics in Statistical Machine Learning](courses/[2026-Rome]-Advanced-Topics-in-Statistical-Machine-Learning/)
+* [Lancaster, 2026 - Physics-Informed Statistical Learning for Spatial and Functional Data](courses/[2026-Lancaster]-Physics-Informed-Statistical-Learning-for-Spatial-and-Functional-Data/)

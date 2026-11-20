@@ -8,7 +8,7 @@
 
 Material for the short course "Physics-Informed Statistical Learning for Spatial and Functional Data" held during the lecture series in "Advanced Topics in Statistical Machine Learning", Rome (IT), 18 February 2026. 
 
-__Lectures: Laura Maria Sangalli <sup>1</sup>, Ilenia Di Battista <sup>1</sup>__.
+__Lectures: Laura Maria Sangalli <sup>1</sup>, Alessandro Palummo <sup>1</sup>__.
 
 &nbsp;&nbsp;&nbsp;&nbsp;_<sup>1</sup> MOX, Department of Mathematics, Politecnico di Milano_
 
@@ -24,11 +24,11 @@ To run the notebooks on [Google Colab](https://colab.google/), just open one of 
 
 **Be sure to run the setup cell at the beginning of each notebook to download the data and install all the required dependencies**.
 
-* [Spatial regression](https://colab.research.google.com/github/fdaPDE/course-materials/blob/main/courses/[2026-Rome]-Advanced-Topics-in-Statistical-Machine-Learning/notebook/SRPDE_2D.ipynb)
-* [Generalized regression](https://colab.research.google.com/github/fdaPDE/course-materials/blob/main/courses/[2026-Rome]-Advanced-Topics-in-Statistical-Machine-Learning/notebook/GSRPDE_2D.ipynb)
-* [Quantile regression](https://colab.research.google.com/github/fdaPDE/course-materials/blob/main/courses/[2026-Rome]-Advanced-Topics-in-Statistical-Machine-Learning/notebook/QSRPDE_2D.ipynb)
-* [Density estimation](https://colab.research.google.com/github/fdaPDE/course-materials/blob/main/courses/[2026-Rome]-Advanced-Topics-in-Statistical-Machine-Learning/notebook/DEPDE_2D.ipynb)
-* [functional Principal Component Analysis](https://colab.research.google.com/github/fdaPDE/course-materials/blob/main/courses/[2026-Rome]-Advanced-Topics-in-Statistical-Machine-Learning/notebook/fPCA_2D.ipynb)
+* [Spatial regression](https://colab.research.google.com/github/fdaPDE/course-materials/blob/main/courses/[2026-Lancaster]-Physics-Informed-Statistical-Learning-for-Spatial-and-Functional-Data/python/notebook/SRPDE_2D.ipynb)
+* [Generalized regression](https://colab.research.google.com/github/fdaPDE/course-materials/blob/main/courses/[2026-Lancaster]-Physics-Informed-Statistical-Learning-for-Spatial-and-Functional-Data/python/notebook/GSRPDE_2D.ipynb)
+* [Quantile regression](https://colab.research.google.com/github/fdaPDE/course-materials/blob/main/courses/[2026-Lancaster]-Physics-Informed-Statistical-Learning-for-Spatial-and-Functional-Data/python/notebook/QSRPDE_2D.ipynb)
+* [Density estimation](https://colab.research.google.com/github/fdaPDE/course-materials/blob/main/courses/[2026-Lancaster]-Physics-Informed-Statistical-Learning-for-Spatial-and-Functional-Data/python/notebook/DEPDE_2D.ipynb)
+* [functional Principal Component Analysis](https://colab.research.google.com/github/fdaPDE/course-materials/blob/main/courses/[2026-Lancaster]-Physics-Informed-Statistical-Learning-for-Spatial-and-Functional-Data/python/notebook/fPCA_2D.ipynb)
 
 ## Installation instructions
 
