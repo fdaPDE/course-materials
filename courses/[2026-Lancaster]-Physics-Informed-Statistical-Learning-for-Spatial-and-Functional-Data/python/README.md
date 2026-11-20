@@ -6,7 +6,7 @@
 </picture>
 </p>
 
-Material for the short course "Physics-Informed Statistical Learning for Spatial and Functional Data" held during the lecture series in "Advanced Topics in Statistical Machine Learning", Rome (IT), 18 February 2026. 
+Material for the short course “Physics-Informed Statistical Learning for Spatial and Functional Data” held as part of the STOR-i masterclass program of the Lancaster University, Lancaster (UK), 24-25 November 2026.
 
 __Lectures: Laura Maria Sangalli <sup>1</sup>, Alessandro Palummo <sup>1</sup>__.
 

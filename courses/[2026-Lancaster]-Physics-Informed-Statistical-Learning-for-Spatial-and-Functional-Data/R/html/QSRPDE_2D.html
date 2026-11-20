@@ -7803,7 +7803,6 @@ a.anchor-link {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h1 id="Quantile-Spatial-Regression-with-Partial-Differential-Equation-Regularization">Quantile Spatial Regression with Partial Differential Equation Regularization<a class="anchor-link" href="#Quantile-Spatial-Regression-with-Partial-Differential-Equation-Regularization">¶</a></h1><p>fdaPDE Team, MOX, Department of Mathematics, Politecnico di Milano, Italy</p>
-<p>fdaPDE Team, MOX, Department of Mathematics, Politecnico di Milano, Italy</p>
 </div>
 </div>
 </div>
@@ -7833,7 +7832,7 @@ $$  J_\alpha(f) = \frac{1}{n} \sum_{i=1}^n \rho_{\alpha}(y_i - \mathbf{x}_i^\top
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=504d9bae">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=c2b4f262-54a0-4f40-871d-53330834f592">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7841,12 +7840,57 @@ $$  J_\alpha(f) = \frac{1}{n} \sum_{i=1}^n \rho_{\alpha}(y_i - \mathbf{x}_i^\top
 <div class="jp-InputPrompt jp-InputArea-prompt">In [1]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-r"><pre><span></span><span class="c1"># Import the fdaPDE library</span>
-<span class="nf">suppressPackageStartupMessages</span><span class="p">(</span><span class="nf">library</span><span class="p">(</span><span class="n">fdaPDE2</span><span class="p">))</span><span class="w">  </span><span class="c1"># v. 2.0 (2025)</span>
-<span class="nf">rm</span><span class="p">(</span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">ls</span><span class="p">())</span>
+<div class="highlight hl-r"><pre><span></span><span class="c1"># Google Colab setup. Skip this cell when running locally.</span>
+<span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="nf">any</span><span class="p">(</span><span class="nf">nzchar</span><span class="p">(</span><span class="nf">Sys.getenv</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span>
+<span class="w">  </span><span class="s">"COLAB_RELEASE_TAG"</span><span class="p">,</span>
+<span class="w">  </span><span class="s">"COLAB_BACKEND_VERSION"</span>
+<span class="p">)))))</span><span class="w"> </span><span class="p">{</span>
 
+<span class="w">  </span><span class="c1"># Download the repository.</span>
+<span class="w">  </span><span class="n">repository</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">"/content/course-materials"</span>
+
+<span class="w">  </span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nf">dir.exists</span><span class="p">(</span><span class="n">repository</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nf">stopifnot</span><span class="p">(</span><span class="nf">system2</span><span class="p">(</span>
+<span class="w">      </span><span class="s">"git"</span><span class="p">,</span>
+<span class="w">      </span><span class="nf">c</span><span class="p">(</span>
+<span class="w">        </span><span class="s">"clone"</span><span class="p">,</span><span class="w"> </span><span class="s">"--depth"</span><span class="p">,</span><span class="w"> </span><span class="s">"1"</span><span class="p">,</span>
+<span class="w">        </span><span class="s">"https://github.com/fdaPDE/course-materials.git"</span><span class="p">,</span>
+<span class="w">        </span><span class="nf">shQuote</span><span class="p">(</span><span class="n">repository</span><span class="p">)</span>
+<span class="w">      </span><span class="p">)</span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">0L</span><span class="p">)</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="c1"># Set the working directory and configure dependencies.</span>
+<span class="w">  </span><span class="nf">setwd</span><span class="p">(</span><span class="nf">file.path</span><span class="p">(</span>
+<span class="w">    </span><span class="n">repository</span><span class="p">,</span>
+<span class="w">    </span><span class="s">"courses"</span><span class="p">,</span>
+<span class="w">    </span><span class="s">"[2026-Lancaster]-Physics-Informed-Statistical-Learning-for-Spatial-and-Functional-Data"</span><span class="p">,</span>
+<span class="w">    </span><span class="s">"R"</span><span class="p">,</span><span class="w"> </span><span class="s">"notebook"</span>
+<span class="w">  </span><span class="p">))</span>
+
+<span class="w">  </span><span class="nf">source</span><span class="p">(</span><span class="s">"../utils/colab_setup.R"</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=504d9bae">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [2]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-r"><pre><span></span><span class="nf">rm</span><span class="p">(</span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">ls</span><span class="p">())</span>
+
+<span class="c1"># Import the fdaPDE library</span>
 <span class="c1"># Load additional libraries and helper functions for plotting</span>
-<span class="nf">source</span><span class="p">(</span><span class="s">"../utils/graphics.R"</span><span class="p">)</span>
+<span class="nf">suppressPackageStartupMessages</span><span class="p">({</span>
+<span class="w">    </span><span class="nf">library</span><span class="p">(</span><span class="n">fdaPDE2</span><span class="p">)</span>
+<span class="w">    </span><span class="nf">source</span><span class="p">(</span><span class="s">"../utils/graphics.R"</span><span class="p">)</span>
+<span class="w">  </span><span class="p">})</span>
 </pre></div>
 </div>
 </div>
@@ -7857,7 +7901,7 @@ $$  J_\alpha(f) = \frac{1}{n} \sum_{i=1}^n \rho_{\alpha}(y_i - \mathbf{x}_i^\top
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [2]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-r"><pre><span></span><span class="nf">theme_set</span><span class="p">(</span><span class="nf">theme_minimal</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
@@ -7900,7 +7944,7 @@ $$  J_\alpha(f) = \frac{1}{n} \sum_{i=1}^n \rho_{\alpha}(y_i - \mathbf{x}_i^\top
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-r"><pre><span></span><span class="c1">## [SPATIAL DOMAIN]</span>
@@ -7934,7 +7978,7 @@ $$  J_\alpha(f) = \frac{1}{n} \sum_{i=1}^n \rho_{\alpha}(y_i - \mathbf{x}_i^\top
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [4]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-r"><pre><span></span><span class="c1"># Convert boundary into a sf object</span>
@@ -8012,7 +8056,7 @@ Figure 1: Spatial domain of interest – Switzerland.
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-r"><pre><span></span><span class="c1"># Define a planar straight-line graph object</span>
@@ -8045,7 +8089,7 @@ Figure 1: Spatial domain of interest – Switzerland.
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [6]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-r"><pre><span></span><span class="c1"># Set up the triangulation for fdaPDE</span>
@@ -8071,7 +8115,7 @@ Figure 1: Spatial domain of interest – Switzerland.
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [7]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [8]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-r"><pre><span></span><span class="c1"># Interactive plot</span>
@@ -8146,7 +8190,7 @@ Figure 2: Regular mesh of the Switzerland domain with $1\,128$ nodes and $2\,077
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [8]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [9]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-r"><pre><span></span><span class="n">switzerland</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">geoframe</span><span class="p">(</span><span class="n">domain</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mesh</span><span class="p">)</span>
@@ -8171,7 +8215,7 @@ Figure 2: Regular mesh of the Switzerland domain with $1\,128$ nodes and $2\,077
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [9]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-r"><pre><span></span><span class="c1">## [DATA]</span>
@@ -8237,7 +8281,7 @@ rainfall log.rainfall
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [10]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [11]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-r"><pre><span></span><span class="n">map1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">mapview</span><span class="p">(</span><span class="n">switzerland</span><span class="p">[[</span><span class="s">"rainfall"</span><span class="p">]],</span><span class="w"> </span>
@@ -8349,7 +8393,7 @@ The anisotropy tensor $\mathbf{K}$ is estimated using the <strong>parameter casc
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [11]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [12]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-r"><pre><span></span><span class="c1">## [DIFFUSION TENSOR]</span>
@@ -8378,7 +8422,7 @@ The anisotropy tensor $\mathbf{K}$ is estimated using the <strong>parameter casc
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [12]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [13]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-r"><pre><span></span><span class="c1">## [PHYSICS-INFORMED QUANTILE REGRESSION]</span>
